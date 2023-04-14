@@ -13,5 +13,5 @@ final Map<String,WidgetBuilder> routes = {
   SignUpPage.routeName: (context) => SignUpPage(),
   HomePage.routeName: (context) => HomePage(),
   ProductDetailPage.routeName: (context) => ProductDetailPage(dataFood: null,),
-  CartPage.routeName: (context) => CartPage(),
+  CartPage.routeName: (context) => CartPage(dataOrder: null,),
 };

@@ -61,7 +61,7 @@ class _SearchHeaderState extends State<SearchHeader> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CartPage()),
+              MaterialPageRoute(builder: (context) =>  const CartPage(dataOrder: null,)),
             );
           },
           child: Stack(

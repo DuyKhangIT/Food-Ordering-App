@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:th_flutter/model/get_products/foods_info.dart';
-
 
 class Global {
-    static List<FoodsInfo> listFood = [];
+    static String orderId = "";
 
     /// Condition to check the email address
     bool checkEmailAddress(String newEmail) {

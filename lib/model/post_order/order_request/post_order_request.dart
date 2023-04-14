@@ -1,15 +1,13 @@
-import 'order_detail_request.dart';
-
-class PostOrderRequest{
+class PostOrderRequest {
   String userName = "";
-  int total = 0;
-  List<OrderDetailRequest>? orderDetail;
+  String? orderId = "";
+  String addFoodId = "";
 
-  PostOrderRequest(this.userName, this.total,this.orderDetail);
+  PostOrderRequest(this.userName, this.orderId, this.addFoodId);
 
   Map<String, dynamic> toBodyRequest() => {
-    'username': userName,
-    'total': total,
-    'orderDetail': orderDetail,
-  };
+        'username': userName,
+        'orderId': orderId,
+        'addFood': addFoodId,
+      };
 }
