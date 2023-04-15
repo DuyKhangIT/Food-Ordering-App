@@ -13,6 +13,12 @@ class _SearchHeaderState extends State<SearchHeader> {
   TextEditingController inputSearchController = TextEditingController();
   String inputSearch = "";
   bool isSearching = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -36,7 +42,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                 fontSize: (14)),
             onChanged: (value) {
               setState(() {
-                //updateSearchCategories(value);
+                //updateSearchFavorite(value);
               });
             },
             decoration: InputDecoration(

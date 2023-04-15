@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:th_flutter/routes/routes.dart';
-import 'package:th_flutter/screen/sign_in/sign_in_page.dart';
 import 'package:th_flutter/screen/splash_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -22,8 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: routes,
-      home:  const SplashPage(),
+      home: const SplashPage(),
     );
   }
 }
-

@@ -1,4 +1,6 @@
 
+import '../model/get_list_favorite/get_list_favorite_response/favorite_foods_response.dart';
+
 class Global {
     static String orderId = "";
 

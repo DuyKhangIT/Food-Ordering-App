@@ -9,6 +9,7 @@ import 'package:th_flutter/model/get_list_favorite/get_list_favorite_response/fa
 import 'package:th_flutter/model/get_list_favorite/get_list_favorite_response/get_list_favorite_response.dart';
 
 import '../../handle_api/handle_api.dart';
+import '../../util/global.dart';
 import '../../util/share_preferences.dart';
 import '../../util/show_loading_dialog.dart';
 
@@ -23,6 +24,7 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
   String username = "";
   List<FavoriteFoodsResponse>? listFav;
   bool isLoading = false;
+
 
   Future<void> getUserName() async {
     username = await ConfigSharedPreferences()
