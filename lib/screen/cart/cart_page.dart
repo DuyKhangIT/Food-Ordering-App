@@ -151,12 +151,13 @@ class _CartPageState extends State<CartPage> {
           IsShowLoading().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
+
           Fluttertoast.showToast(
               msg: "Total:${sumOrderResponse.dataSumOrderResponse!.total}",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 3,
-              backgroundColor: Colors.green,
+              timeInSecForIosWeb: 10,
+              backgroundColor: Colors.grey,
               textColor: Colors.white,
               fontSize: 16);
         }
@@ -263,8 +264,7 @@ class _CartPageState extends State<CartPage> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          listDataOrder != null
-              ? Expanded(
+              Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: listDataOrder!.length,
@@ -279,13 +279,7 @@ class _CartPageState extends State<CartPage> {
                           ],
                         );
                       }),
-                )
-              : Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  alignment: Alignment.center,
-                  child: Text("Order is empty"),
                 ),
-          listDataOrder == null ? const Spacer() : Container(),
           checkOutAndSumCart()
         ],
       ),
