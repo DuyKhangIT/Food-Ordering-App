@@ -128,14 +128,14 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return listFav != null
+    return listFav != null && listFav!.isNotEmpty
         ? Expanded(
             child: ListView.builder(
                 itemCount: listFav!.length,
                 itemBuilder: (context, index) {
                   return productItemList(context, index);
                 }))
-        : Container();
+        : Expanded(child: Center(child: Text("You don't have any favorites")));
   }
 
   Widget productItemList(BuildContext context, index) {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:th_flutter/screen/home/appbar/search_header.dart';
 
 import '../../handle_api/handle_api.dart';
@@ -88,8 +89,9 @@ class _HomePageState extends State<HomePage> {
       }
     }
     setState(() {
-      if(getOrderResponse
-          .dataGetOrderResponse!.responseOrderList!.orderDetailResponseGet!=null){
+      if (getOrderResponse.dataGetOrderResponse!.responseOrderList!
+              .orderDetailResponseGet !=
+          null) {
         listDataOrder = getOrderResponse
             .dataGetOrderResponse!.responseOrderList!.orderDetailResponseGet!;
       }
@@ -122,15 +124,15 @@ class _HomePageState extends State<HomePage> {
             ? [
                 GestureDetector(
                   onTap: () {
-                    if(listDataOrder!=null && listDataOrder!.isNotEmpty){
+                    if (listDataOrder != null && listDataOrder!.isNotEmpty) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CartPage(
-                              dataOrder: listDataOrder,
-                            )),
+                                  dataOrder: listDataOrder,
+                                )),
                       );
-                    } else{
+                    } else {
                       Fluttertoast.showToast(
                           msg: "Do not exist order!",
                           toastLength: Toast.LENGTH_SHORT,
@@ -140,7 +142,6 @@ class _HomePageState extends State<HomePage> {
                           textColor: Colors.white,
                           fontSize: 16);
                     }
-
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20, top: 5),
@@ -164,12 +165,12 @@ class _HomePageState extends State<HomePage> {
                               minWidth: 16,
                               minHeight: 16,
                             ),
-                            child:  Text(
-                              listDataOrder!= null && listDataOrder!.isNotEmpty
+                            child: Text(
+                              listDataOrder != null && listDataOrder!.isNotEmpty
                                   ? listDataOrder!.length > 9
-                                    ? "9+"
-                                    :"${listDataOrder!.length}"
-                                  :"0" ,
+                                      ? "9+"
+                                      : "${listDataOrder!.length}"
+                                  : "0",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10.5,

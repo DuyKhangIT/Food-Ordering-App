@@ -70,6 +70,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           body: const JsonEncoder().convert(postOrderRequest.toBodyRequest()));
     } catch (error) {
       debugPrint("Fail to add to cart $error");
+      setState(() {
+        isLoading = false;
+        if (isLoading) {
+          IsShowLoading().showLoadingDialog(context);
+        } else {
+          Navigator.of(context).pop();
+          Fluttertoast.showToast(
+              msg: "Error from server",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16);
+        }
+      });
       rethrow;
     }
     if (body == null) return PostOrderResponse.buildDefault();
@@ -135,6 +151,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               const JsonEncoder().convert(addFavoriteRequest.toBodyRequest()));
     } catch (error) {
       debugPrint("Fail to add to fav $error");
+      setState(() {
+        isLoading = false;
+        if (isLoading) {
+          IsShowLoading().showLoadingDialog(context);
+        } else {
+          Navigator.of(context).pop();
+          Fluttertoast.showToast(
+              msg: "Error from server",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16);
+        }
+      });
       rethrow;
     }
     if (body == null) return AddFavoriteResponse.buildDefault();
@@ -173,6 +205,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 textColor: Colors.white,
                 fontSize: 16);
             del = addFavoriteResponse.del;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const HomePage()));
           }
         });
       } else {
@@ -191,6 +228,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 textColor: Colors.white,
                 fontSize: 16);
             del = addFavoriteResponse.del;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                    const HomePage()));
           }
         });
       }
@@ -221,6 +263,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               .convert(checkIsFavoriteRequest.toBodyRequest()));
     } catch (error) {
       debugPrint("Fail to check fav $error");
+      setState(() {
+        isLoading = false;
+        if (isLoading) {
+          IsShowLoading().showLoadingDialog(context);
+        } else {
+          Navigator.of(context).pop();
+          Fluttertoast.showToast(
+              msg: "Error from server",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16);
+        }
+      });
       rethrow;
     }
     if (body == null) return CheckIsFavoriteResponse.buildDefault();
