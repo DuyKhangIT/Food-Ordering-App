@@ -25,7 +25,6 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
   List<FavoriteFoodsResponse>? listFav;
   bool isLoading = false;
 
-
   Future<void> getUserName() async {
     username = await ConfigSharedPreferences()
         .getStringValue(SharedData.USERNAME.toString(), defaultValue: "");
@@ -50,7 +49,7 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -97,7 +96,7 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           listFav = getListFavoriteResponse
@@ -108,7 +107,7 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -133,12 +132,12 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
             child: ListView.builder(
                 itemCount: listFav!.length,
                 itemBuilder: (context, index) {
-                  return productItemList(context, index);
+                  return favoritesItemList(context, index);
                 }))
-        : Expanded(child: Center(child: Text("You don't have any favorites")));
+        : const SizedBox();
   }
 
-  Widget productItemList(BuildContext context, index) {
+  Widget favoritesItemList(BuildContext context, index) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Row(
@@ -162,8 +161,12 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width / 1.5,
                     height: 20,
-                    child: Text(listFav![index].title!,
-                        overflow: TextOverflow.ellipsis, maxLines: 1)),
+                    child: Text(
+                      listFav![index].title!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    )),
 
                 ///api
                 Container(

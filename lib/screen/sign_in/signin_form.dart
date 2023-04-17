@@ -39,7 +39,7 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -62,7 +62,7 @@ class _SignInFormState extends State<SignInForm> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -79,7 +79,7 @@ class _SignInFormState extends State<SignInForm> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           setState(() {
             ConfigSharedPreferences().setStringValue(

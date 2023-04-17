@@ -40,7 +40,7 @@ class _CartPageState extends State<CartPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -65,7 +65,7 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -82,7 +82,7 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -108,7 +108,7 @@ class _CartPageState extends State<CartPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -131,7 +131,7 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -148,18 +148,12 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
 
-          Fluttertoast.showToast(
-              msg: "Total:${sumOrderResponse.dataSumOrderResponse!.total}",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 10,
-              backgroundColor: Colors.grey,
-              textColor: Colors.white,
-              fontSize: 16);
+          IsShowDialog().showDialogContent(context,
+              "${sumOrderResponse.dataSumOrderResponse!.total}.000 VND");
         }
       });
     }
@@ -173,7 +167,7 @@ class _CartPageState extends State<CartPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -198,7 +192,7 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -215,7 +209,7 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -264,22 +258,22 @@ class _CartPageState extends State<CartPage> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-              Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: listDataOrder!.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: cartItem(index),
-                            ),
-                            const Divider()
-                          ],
-                        );
-                      }),
-                ),
+          Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: listDataOrder!.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: cartItem(index),
+                      ),
+                      const Divider()
+                    ],
+                  );
+                }),
+          ),
           checkOutAndSumCart()
         ],
       ),
@@ -306,7 +300,7 @@ class _CartPageState extends State<CartPage> {
                     fit: BoxFit.cover),
               ),
               Container(
-                  constraints: const BoxConstraints(maxWidth: 150),
+                  constraints: const BoxConstraints(maxWidth: 140),
                   height: 30,
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(right: 10),
@@ -316,12 +310,12 @@ class _CartPageState extends State<CartPage> {
                     overflow: TextOverflow.ellipsis,
                   )),
               Container(
-                  constraints: const BoxConstraints(maxWidth: 65),
+                  constraints: const BoxConstraints(maxWidth: 80),
                   height: 20,
                   alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(right: 10),
                   child: Text(
-                    listDataOrder![index].price!.toString(),
+                    "${listDataOrder![index].price!}.000 VND",
                     maxLines: 1,
                   )),
               GestureDetector(

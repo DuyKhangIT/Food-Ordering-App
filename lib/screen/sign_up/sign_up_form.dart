@@ -36,7 +36,7 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -60,7 +60,7 @@ class _SignUpFormState extends State<SignUpForm> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -77,7 +77,7 @@ class _SignUpFormState extends State<SignUpForm> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(

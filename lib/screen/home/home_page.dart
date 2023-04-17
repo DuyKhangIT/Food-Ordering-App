@@ -28,7 +28,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectIndex = 0;
-  var flag = true;
+  bool favorites = true;
+  bool notification = true;
   bool homePage = true;
   List<OrderDetailResponseGet>? listDataOrder;
   String userId = "";
@@ -90,13 +91,18 @@ class _HomePageState extends State<HomePage> {
     }
     setState(() {
       if (getOrderResponse.dataGetOrderResponse!.responseOrderList!
-              .orderDetailResponseGet !=
-          null) {
+                  .orderDetailResponseGet !=
+              null &&
+          getOrderResponse.dataGetOrderResponse!.responseOrderList!
+              .orderDetailResponseGet!.isNotEmpty) {
         listDataOrder = getOrderResponse
             .dataGetOrderResponse!.responseOrderList!.orderDetailResponseGet!;
       }
-      Global.orderId =
-          getOrderResponse.dataGetOrderResponse!.responseOrderList!.orderId;
+      if (getOrderResponse
+          .dataGetOrderResponse!.responseOrderList!.orderId.isNotEmpty) {
+        Global.orderId =
+            getOrderResponse.dataGetOrderResponse!.responseOrderList!.orderId;
+      }
     });
 
     return getOrderResponse;
@@ -117,9 +123,11 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         title: homePage
             ? const Text("Home")
-            : flag
-                ? const SearchHeader()
-                : const MenuHeader(),
+            : favorites
+                ? Text("Favorites")
+                : notification
+                    ? Text("Notificaitons")
+                    : const MenuHeader(),
         actions: homePage
             ? [
                 GestureDetector(
@@ -153,39 +161,39 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(10),
                           child: const Icon(Icons.shopping_cart_outlined),
                         ),
-                        Positioned(
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(1.5),
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            constraints: const BoxConstraints(
-                              minWidth: 16,
-                              minHeight: 16,
-                            ),
-                            child: Text(
-                              listDataOrder != null && listDataOrder!.isNotEmpty
-                                  ? listDataOrder!.length > 9
-                                      ? "9+"
-                                      : "${listDataOrder!.length}"
-                                  : "0",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10.5,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        )
+                        listDataOrder != null && listDataOrder!.isNotEmpty
+                            ? Positioned(
+                                right: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(1.5),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  constraints: const BoxConstraints(
+                                    minWidth: 16,
+                                    minHeight: 16,
+                                  ),
+                                  child: Text(
+                                    listDataOrder!.length > 9
+                                        ? "9+"
+                                        : "${listDataOrder!.length}",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10.5,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              )
+                            : Container()
                       ],
                     ),
                   ),
                 )
               ]
             : null,
-        centerTitle: homePage ? true : false,
+        centerTitle: true,
         elevation: 0,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -200,10 +208,15 @@ class _HomePageState extends State<HomePage> {
             } else {
               homePage = false;
             }
-            if (selectIndex != 3) {
-              flag = true;
+            if (selectIndex == 1) {
+              favorites = true;
             } else {
-              flag = false;
+              favorites = false;
+            }
+            if (selectIndex == 2) {
+              notification = true;
+            } else {
+              notification = false;
             }
           });
         },

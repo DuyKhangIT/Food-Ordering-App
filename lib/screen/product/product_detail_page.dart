@@ -55,7 +55,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -73,7 +73,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -94,7 +94,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -111,7 +111,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -122,6 +122,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               backgroundColor: Colors.green,
               textColor: Colors.white,
               fontSize: 16);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                  const HomePage()));
         }
       });
     }
@@ -135,7 +140,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -154,7 +159,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -175,7 +180,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -193,7 +198,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         setState(() {
           isLoading = false;
           if (isLoading) {
-            IsShowLoading().showLoadingDialog(context);
+            IsShowDialog().showLoadingDialog(context);
           } else {
             Navigator.of(context).pop();
             Fluttertoast.showToast(
@@ -216,7 +221,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         setState(() {
           isLoading = false;
           if (isLoading) {
-            IsShowLoading().showLoadingDialog(context);
+            IsShowDialog().showLoadingDialog(context);
           } else {
             Navigator.of(context).pop();
             Fluttertoast.showToast(
@@ -247,7 +252,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     setState(() {
       isLoading = true;
       if (isLoading) {
-        IsShowLoading().showLoadingDialog(context);
+        IsShowDialog().showLoadingDialog(context);
       } else {
         Navigator.of(context).pop();
       }
@@ -266,7 +271,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
@@ -287,7 +292,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       setState(() {
         isLoading = false;
         if (isLoading) {
-          IsShowLoading().showLoadingDialog(context);
+          IsShowDialog().showLoadingDialog(context);
         } else {
           Navigator.of(context).pop();
         }
@@ -297,7 +302,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         setState(() {
           isLoading = false;
           if (isLoading) {
-            IsShowLoading().showLoadingDialog(context);
+            IsShowDialog().showLoadingDialog(context);
           } else {
             Navigator.of(context).pop();
 
@@ -308,7 +313,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         setState(() {
           isLoading = false;
           if (isLoading) {
-            IsShowLoading().showLoadingDialog(context);
+            IsShowDialog().showLoadingDialog(context);
           } else {
             Navigator.of(context).pop();
             isFavorite = checkIsFavoriteResponse.isFav;
