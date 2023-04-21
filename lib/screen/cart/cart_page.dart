@@ -50,7 +50,7 @@ class _CartPageState extends State<CartPage> {
     try {
       body = await HttpHelper.invokeHttp(
           Uri.parse(
-              "https://apibeflutterdlaw.up.railway.app/api/order/remove-item"),
+              "https://flutterlabapi-cndk.up.railway.app/api/order/remove-item"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()
@@ -117,7 +117,7 @@ class _CartPageState extends State<CartPage> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://apibeflutterdlaw.up.railway.app/api/order/sum"),
+          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/order/sum"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder().convert(sumOrderRequest.toBodyRequest()));
@@ -177,7 +177,7 @@ class _CartPageState extends State<CartPage> {
     try {
       body = await HttpHelper.invokeHttp(
           Uri.parse(
-              "https://apibeflutterdlaw.up.railway.app/api/order/checkout"),
+              "https://flutterlabapi-cndk.up.railway.app/api/order/checkout"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()

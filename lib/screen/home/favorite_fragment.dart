@@ -58,7 +58,7 @@ class _FavoriteDetailState extends State<FavoriteDetail> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://apibeflutterdlaw.up.railway.app/api/fav/"),
+          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/fav/"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()

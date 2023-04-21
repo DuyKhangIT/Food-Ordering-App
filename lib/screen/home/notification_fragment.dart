@@ -42,7 +42,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
     super.initState();
   }
 
-  /// call api list favorite
+  /// call api list notification
   Future<ListNotificationResponse> getListNotification(
       ListNotificationRequest listNotificationRequest) async {
     setState(() {
@@ -57,7 +57,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://apibeflutterdlaw.up.railway.app/api/noti/"),
+          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/noti/"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()
@@ -72,7 +72,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
 
     List<NotificationObjectResponse> notificationResponseList = [];
     if (listNotificationResponse
-            .dataListNotificationResponse!.listNotificationsResponse !=
+            .dataListNotificationResponse?.listNotificationsResponse !=
         null) {
       for (int i = 0;
           i <
@@ -102,15 +102,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   null) {
             listNotification = listNotificationResponse
                 .dataListNotificationResponse!.listNotificationsResponse;
-          }else{
-            Fluttertoast.showToast(
-                msg: "You don't have any notification",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 3,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16);
+            Navigator.of(context).pop();
           }
         }
       });

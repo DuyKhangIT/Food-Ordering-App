@@ -46,7 +46,7 @@ class _SignUpFormState extends State<SignUpForm> {
     try {
       body = await HttpHelper.invokeHttp(
           Uri.parse(
-              "https://apibeflutterdlaw.up.railway.app/api/user/register"),
+              "https://flutterlabapi-cndk.up.railway.app/api/user/register"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder().convert(registerRequest.toBodyRequest()));
