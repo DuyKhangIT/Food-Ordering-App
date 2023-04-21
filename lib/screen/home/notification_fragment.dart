@@ -12,7 +12,6 @@ import '../../util/share_preferences.dart';
 import '../../util/show_loading_dialog.dart';
 
 class NotificationDetail extends StatefulWidget {
-  static String routeName = "/push-page";
   const NotificationDetail({Key? key}) : super(key: key);
 
   @override
@@ -102,7 +101,6 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   null) {
             listNotification = listNotificationResponse
                 .dataListNotificationResponse!.listNotificationsResponse;
-            Navigator.of(context).pop();
           }
         }
       });

@@ -88,22 +88,22 @@ class _HomePageState extends State<HomePage> {
           orderDetailResponseGet.price ??= 0,
         ));
       }
+      setState(() {
+        if (getOrderResponse.dataGetOrderResponse!.responseOrderList!
+                    .orderDetailResponseGet !=
+                null &&
+            getOrderResponse.dataGetOrderResponse!.responseOrderList!
+                .orderDetailResponseGet!.isNotEmpty) {
+          listDataOrder = getOrderResponse
+              .dataGetOrderResponse!.responseOrderList!.orderDetailResponseGet!;
+        }
+        if (getOrderResponse
+            .dataGetOrderResponse!.responseOrderList!.orderId.isNotEmpty) {
+          Global.orderId =
+              getOrderResponse.dataGetOrderResponse!.responseOrderList!.orderId;
+        }
+      });
     }
-    setState(() {
-      if (getOrderResponse.dataGetOrderResponse!.responseOrderList!
-                  .orderDetailResponseGet !=
-              null &&
-          getOrderResponse.dataGetOrderResponse!.responseOrderList!
-              .orderDetailResponseGet!.isNotEmpty) {
-        listDataOrder = getOrderResponse
-            .dataGetOrderResponse!.responseOrderList!.orderDetailResponseGet!;
-      }
-      if (getOrderResponse
-          .dataGetOrderResponse!.responseOrderList!.orderId.isNotEmpty) {
-        Global.orderId =
-            getOrderResponse.dataGetOrderResponse!.responseOrderList!.orderId;
-      }
-    });
 
     return getOrderResponse;
   }
