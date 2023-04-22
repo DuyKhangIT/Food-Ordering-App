@@ -9,47 +9,47 @@ import 'package:fluttertoast/fluttertoast.dart';
 Fluttertoast? flutterToast;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
 
-  FirebaseMessaging.instance
-      .getToken()
-      .then((value) => {print("get token: $value")});
+  // FirebaseMessaging.instance
+  //     .getToken()
+  //     .then((value) => {print("get token: $value")});
 
-  FirebaseMessaging.onMessageOpenedApp.listen((event) {
-    (RemoteMessage message) async {
-      print("openMessageOpenedApp: $message");
-    };
-  });
+  // FirebaseMessaging.onMessageOpenedApp.listen((event) {
+  //   (RemoteMessage message) async {
+  //     print("openMessageOpenedApp: $message");
+  //   };
+  // });
 
-  FirebaseMessaging.instance.getInitialMessage().then((value) => {});
+  // FirebaseMessaging.instance.getInitialMessage().then((value) => {});
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-    print("Accepted permission: $accepted");
-  });
+  // OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+  //   print("Accepted permission: $accepted");
+  // });
 
-  await OneSignal.shared.setAppId("95e65145-2b37-4da7-aa7d-d3a540a418b9");
+  // await OneSignal.shared.setAppId("95e65145-2b37-4da7-aa7d-d3a540a418b9");
 
-  await OneSignal.shared
-      .getDeviceState()
-      .then((value) => {print(value!.userId)});
+  // await OneSignal.shared
+  //     .getDeviceState()
+  //     .then((value) => {print(value!.userId)});
 
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {
-    // Will be called whenever a notification is received in foreground
-    // Display Notification, pass null param for not displaying the notification
-    event.complete(event.notification);
-  });
+  // OneSignal.shared.setNotificationWillShowInForegroundHandler(
+  //     (OSNotificationReceivedEvent event) {
+  //   // Will be called whenever a notification is received in foreground
+  //   // Display Notification, pass null param for not displaying the notification
+  //   event.complete(event.notification);
+  // });
 
   flutterToast = Fluttertoast();
   runApp(const MyApp());
 }
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print("_firebaseMessagingBackgroundHandler: $message");
-}
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   print("_firebaseMessagingBackgroundHandler: $message");
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: routes,
       home: const SplashPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
