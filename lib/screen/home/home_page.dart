@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     try {
       body = await HttpHelper.invokeHttp(
           Uri.parse(
-              "https://flutterlabapi-cndk.up.railway.app/api/order/$userId"),
+              "http://14.225.204.248:7070/api/order/$userId"),
           RequestType.get,
           headers: null,
           body: null);

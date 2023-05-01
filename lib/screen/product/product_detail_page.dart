@@ -64,7 +64,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/order"),
+          Uri.parse("http://14.225.204.248:7070/api/order"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder().convert(postOrderRequest.toBodyRequest()));
@@ -149,7 +149,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/fav/add"),
+          Uri.parse("http://14.225.204.248:7070/api/fav/add"),
           RequestType.post,
           headers: null,
           body:
@@ -261,7 +261,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/fav/isFav"),
+          Uri.parse("http://14.225.204.248:7070/api/fav/isFav"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()

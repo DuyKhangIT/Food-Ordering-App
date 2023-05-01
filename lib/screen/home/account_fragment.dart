@@ -64,7 +64,7 @@ class _AccountDetailState extends State<AccountDetail> {
     try {
       body = await HttpHelper.invokeHttp(
           Uri.parse(
-              "https://flutterlabapi-cndk.up.railway.app/api/user/update-user"),
+              "http://14.225.204.248:7070/api/user/update-user"),
           RequestType.put,
           headers: null,
           body: const JsonEncoder()

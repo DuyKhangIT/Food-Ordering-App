@@ -32,7 +32,7 @@ class _CategoriesStoreState extends State<CategoriesStore> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/category"),
+          Uri.parse("http://14.225.204.248:7070/api/category"),
           RequestType.get,
           headers: null,
           body: null);

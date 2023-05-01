@@ -21,23 +21,6 @@ class HttpHelper {
     responseBody = jsonDecode(utf8.decode(response.bodyBytes));
     return responseBody;
   }
-  /// list
-  static Future<List<dynamic>?> invokeHttpList(dynamic url, RequestType type,
-      {Map<String, String>? headers, dynamic body, Encoding? encoding}) async {
-    http.Response response;
-    List<dynamic>? responseBody;
-    try {
-      response = await _invoke(url, type,
-          headers: getHeaders(headers),
-          body: body,
-          encoding: Encoding.getByName("utf-8"));
-    } catch (error) {
-      rethrow;
-    }
-    if (response.body.isEmpty) return null;
-    responseBody = jsonDecode(utf8.decode(response.bodyBytes));
-    return responseBody;
-  }
 
   static Future<http.Response> _invoke(dynamic url, RequestType type,
       {Map<String, String>? headers, dynamic body, Encoding? encoding}) async {
@@ -63,17 +46,6 @@ class HttpHelper {
       // check for any errors
       if (response.statusCode == 200) {
         Map<String, dynamic> body = jsonDecode(response.body);
-        // if (response.statusCode == 500) {
-        //   try {
-        //     String error = body['error'];
-        //     throw APIException(error, response.statusCode, null);
-        //   } catch (e) {
-        //     throw APIException(body['message'], response.statusCode, null);
-        //   }
-        // } else {
-        //   throw APIException(
-        //       body['message'], response.statusCode, body['statusText']);
-        // }
       }
       return response;
     } on http.ClientException {

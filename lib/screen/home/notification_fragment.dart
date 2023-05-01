@@ -56,7 +56,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/noti/"),
+          Uri.parse("http://14.225.204.248:7070/api/noti/"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder()

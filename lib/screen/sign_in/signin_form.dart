@@ -48,7 +48,7 @@ class _SignInFormState extends State<SignInForm> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/user/login"),
+          Uri.parse("http://14.225.204.248:7070/api/user/login"),
           RequestType.post,
           headers: null,
           body: const JsonEncoder().convert(loginRequest.toBodyRequest()));

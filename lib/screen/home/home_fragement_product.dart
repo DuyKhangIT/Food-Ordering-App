@@ -34,7 +34,7 @@ class _ProductPopularState extends State<ProductPopular> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse("https://flutterlabapi-cndk.up.railway.app/api/food"),
+          Uri.parse("http://14.225.204.248:7070/api/food"),
           RequestType.get,
           headers: null,
           body: null);
