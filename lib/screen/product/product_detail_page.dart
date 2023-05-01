@@ -6,7 +6,7 @@ import 'package:th_flutter/model/add_favorite/add_favorite_request.dart';
 import 'package:th_flutter/model/add_favorite/add_favorite_response.dart';
 import 'package:th_flutter/model/check_is_fav/check_is_fav_requuest.dart';
 import 'package:th_flutter/model/check_is_fav/check_is_favorite_response.dart';
-import 'package:th_flutter/model/get_products/foods_info.dart';
+import 'package:th_flutter/model/get_products/foods_response.dart';
 import 'package:th_flutter/model/post_order/order_request/post_order_request.dart';
 import 'package:th_flutter/model/post_order/order_response/post_order_response.dart';
 import 'package:th_flutter/screen/home/home_page.dart';
@@ -17,7 +17,7 @@ import '../../util/share_preferences.dart';
 import '../../util/show_loading_dialog.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  final FoodsInfo? dataFood;
+  final FoodsResponse? dataFood;
   static String routeName = "/product_screen";
   const ProductDetailPage({Key? key, required this.dataFood}) : super(key: key);
 
@@ -41,9 +41,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     username = await ConfigSharedPreferences()
         .getStringValue(SharedData.USERNAME.toString(), defaultValue: "");
     setState(() {
-      if (username.isNotEmpty && widget.dataFood!.mId.isNotEmpty) {
+      if (username.isNotEmpty && widget.dataFood!.id!.isNotEmpty) {
         CheckIsFavoriteRequest checkIsFavoriteRequest =
-            CheckIsFavoriteRequest(username, widget.dataFood!.mId);
+            CheckIsFavoriteRequest(username, widget.dataFood!.id!);
         checkIsFavoriteApi(checkIsFavoriteRequest);
       }
     });
@@ -368,12 +368,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             width: MediaQuery.of(context).size.width,
             height: 250,
             margin: const EdgeInsets.only(bottom: 20),
-            child: Image.network(widget.dataFood!.mImage, fit: BoxFit.cover),
+            child: Image.network(widget.dataFood!.image!, fit: BoxFit.cover),
           ),
           Container(
               width: MediaQuery.of(context).size.width,
               constraints: const BoxConstraints(minHeight: 100),
-              child: Text(widget.dataFood!.mDescription)),
+              child: Text(widget.dataFood!.description!)),
         ],
       ),
     );
@@ -383,9 +383,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return InkWell(
       onTap: () {
         if (Global.isAvailableToClick()) {
-          if (username.isNotEmpty && widget.dataFood!.mId.isNotEmpty) {
+          if (username.isNotEmpty && widget.dataFood!.id!.isNotEmpty) {
             PostOrderRequest postOrderRequest = PostOrderRequest(
-                username, Global.orderId, widget.dataFood!.mId);
+                username, Global.orderId, widget.dataFood!.id!);
             addToCartApi(postOrderRequest);
           } else {
             Fluttertoast.showToast(
@@ -421,9 +421,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return InkWell(
       onTap: () {
         if (Global.isAvailableToClick()) {
-          if (username.isNotEmpty && widget.dataFood!.mId.isNotEmpty) {
+          if (username.isNotEmpty && widget.dataFood!.id!.isNotEmpty) {
             AddFavoriteRequest addFavoriteRequest =
-                AddFavoriteRequest(username, widget.dataFood!.mId);
+                AddFavoriteRequest(username, widget.dataFood!.id!);
             addToFavoriteApi(addFavoriteRequest);
           }
         }

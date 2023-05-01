@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:th_flutter/model/get_products/product_info.dart';
+import 'package:th_flutter/model/get_products/foods_response.dart';
+import 'package:th_flutter/model/get_products/product_response.dart';
 import 'package:th_flutter/screen/product/product_detail_page.dart';
 
-import '../../model/get_products/foods_info.dart';
 import '../../util/global.dart';
 
 class ListAllProduct extends StatefulWidget {
-  final ProductInfo productInfo;
+  final ProductResponse productInfo;
   const ListAllProduct({Key? key, required this.productInfo}) : super(key: key);
 
   @override
@@ -17,13 +17,13 @@ class _ListAllProductState extends State<ListAllProduct> {
   TextEditingController inputSearchController = TextEditingController();
   String inputSearch = "";
   bool isSearching = false;
-  List<FoodsInfo> dataFoods = [];
+  List<FoodsResponse> dataFoods = [];
 
   /// new list for searching
-  List<FoodsInfo> result = [];
+  List<FoodsResponse> result = [];
   @override
   void initState() {
-    dataFoods = widget.productInfo.mDataInfo!.mFoodsInfo!;
+    dataFoods = widget.productInfo.dataResponse!.listFoods!;
     result = dataFoods;
     super.initState();
   }
@@ -35,7 +35,7 @@ class _ListAllProductState extends State<ListAllProduct> {
       setState(() {
         result = dataFoods
             .where((element) => Global()
-                .accentParser(element.mTitle)
+                .accentParser(element.title!)
                 .toLowerCase()
                 .contains(Global().accentParser(value).toLowerCase()))
             .toList();
@@ -124,7 +124,7 @@ class _ListAllProductState extends State<ListAllProduct> {
                         children: [
                           // image from api
                           Image.network(
-                            result[index].mImage,
+                            result[index].image!,
                             fit: BoxFit.cover,
                             width: 150,
                             height: 150,
@@ -135,7 +135,7 @@ class _ListAllProductState extends State<ListAllProduct> {
                               margin: const EdgeInsets.only(top: 10),
                               constraints: const BoxConstraints(maxHeight: 32),
                               child: Text(
-                                result[index].mTitle,
+                                result[index].title!,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               )),
@@ -149,7 +149,7 @@ class _ListAllProductState extends State<ListAllProduct> {
                                 borderRadius: BorderRadius.circular(2),
                                 color: Colors.green),
                             child: Text(
-                              "${result[index].mPrice}.000 VNĐ",
+                              "${result[index].price!}.000 VNĐ",
 
                               /// api
                               style: const TextStyle(

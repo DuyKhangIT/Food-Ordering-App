@@ -8,7 +8,7 @@ class ProductResponse {
       this.status,
       this.dataResponse,
       );
-
+  ProductResponse.buildDefault();
   factory ProductResponse.fromJson(Map<String, dynamic> json) {
     return ProductResponse(
       json['status'],

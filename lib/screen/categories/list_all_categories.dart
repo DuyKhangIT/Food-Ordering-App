@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:th_flutter/model/get_categories/categories_info.dart';
-import 'package:th_flutter/model/get_categories/store_info.dart';
+import 'package:th_flutter/model/get_categories/categories_response.dart';
+import 'package:th_flutter/model/get_categories/store_response.dart';
 import '../../util/global.dart';
 
 class ListAllCategories extends StatefulWidget {
-  final StoreInfo storeInfo;
+  final StoreResponse storeInfo;
   const ListAllCategories({Key? key, required this.storeInfo})
       : super(key: key);
 
@@ -13,16 +13,16 @@ class ListAllCategories extends StatefulWidget {
 }
 
 class _ListAllCategoriesState extends State<ListAllCategories> {
-  List<CategoriesInfo> dataCategories = [];
+  List<CategoriesResponse> dataCategories = [];
   TextEditingController inputSearchController = TextEditingController();
   String inputSearch = "";
   bool isSearching = false;
 
   /// new list for searching
-  List<CategoriesInfo> resultCategory = [];
+  List<CategoriesResponse> resultCategory = [];
   @override
   void initState() {
-    dataCategories = widget.storeInfo.mDataCategoriesInfo!.mCategoriesInfo!;
+    dataCategories = widget.storeInfo.dataCategoriesResponse!.listCategories!;
     resultCategory = dataCategories;
     super.initState();
   }
@@ -34,7 +34,7 @@ class _ListAllCategoriesState extends State<ListAllCategories> {
       setState(() {
         resultCategory = dataCategories
             .where((element) => Global()
-                .accentParser(element.mTitle)
+                .accentParser(element.title!)
                 .toLowerCase()
                 .contains(Global().accentParser(value).toLowerCase()))
             .toList();
@@ -111,7 +111,7 @@ class _ListAllCategoriesState extends State<ListAllCategories> {
                     children: [
                       // image from api
                       Image.network(
-                        resultCategory[index].mImage,
+                        resultCategory[index].image!,
                         fit: BoxFit.cover,
                         width: 150,
                         height: 150,
@@ -123,7 +123,7 @@ class _ListAllCategoriesState extends State<ListAllCategories> {
                           constraints: const BoxConstraints(maxHeight: 35),
                           alignment: Alignment.center,
                           child: Text(
-                            resultCategory[index].mTitle,
+                            resultCategory[index].title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontWeight: FontWeight.bold),

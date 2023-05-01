@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:th_flutter/assets/assets.dart';
-import 'package:th_flutter/model/get_products/product_info.dart';
 
 import '../../handle_api/handle_api.dart';
-import '../../model/get_products/data_info.dart';
-import '../../model/get_products/foods_info.dart';
 import '../../model/get_products/foods_response.dart';
 import '../../model/get_products/product_response.dart';
 import '../product/list_all_product.dart';
@@ -19,8 +15,8 @@ class ProductPopular extends StatefulWidget {
 }
 
 class _ProductPopularState extends State<ProductPopular> {
-  List<FoodsInfo>? data;
-  ProductInfo? dataProduct;
+  List<FoodsResponse>? data;
+  ProductResponse? dataProduct;
   @override
   void initState() {
     getProduct();
@@ -28,9 +24,8 @@ class _ProductPopularState extends State<ProductPopular> {
   }
 
   /// call api list foods
-  Future<ProductInfo> getProduct() async {
+  Future<ProductResponse> getProduct() async {
     ProductResponse productResponse;
-    ProductInfo productInfo;
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
@@ -42,40 +37,16 @@ class _ProductPopularState extends State<ProductPopular> {
       debugPrint("Fail to foods info $error");
       rethrow;
     }
-    if (body == null) return ProductInfo.buildDefault();
+    if (body == null) return ProductResponse.buildDefault();
     //get data from api here
     productResponse = ProductResponse.fromJson(body);
 
-    List<FoodsInfo> foodsInfo = [];
-    if (productResponse.dataResponse != null) {
-      for (int i = 0;
-          i < productResponse.dataResponse!.listFoods!.length;
-          i++) {
-        FoodsResponse foodsResponse =
-            productResponse.dataResponse!.listFoods![i];
-        foodsInfo.add(FoodsInfo(
-          foodsResponse.id ??= "",
-          foodsResponse.title ??= "",
-          foodsResponse.description ??= "",
-          foodsResponse.price ??= 0,
-          foodsResponse.image ??= "",
-        ));
-      }
-    }
-    productInfo = ProductInfo(
-      productResponse.status!,
-      (productResponse.dataResponse != null)
-          ? DataInfo(
-              foodsInfo,
-            )
-          : null,
-    );
     setState(() {
-      data = productInfo.mDataInfo!.mFoodsInfo;
-      dataProduct = productInfo;
+      data = productResponse.dataResponse!.listFoods;
+      dataProduct = productResponse;
     });
 
-    return productInfo;
+    return productResponse;
   }
 
   @override
@@ -126,9 +97,9 @@ class _ProductPopularState extends State<ProductPopular> {
                       crossAxisSpacing: 10,
                       childAspectRatio: 0.65),
                   itemBuilder: (context, index) {
-                    return data![index].mTitle.isNotEmpty &&
-                            data![index].mPrice.toString().isNotEmpty &&
-                            data![index].mImage.isNotEmpty
+                    return data![index].title!.isNotEmpty &&
+                            data![index].price!.toString().isNotEmpty &&
+                            data![index].image!.isNotEmpty
                         ? GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -144,7 +115,7 @@ class _ProductPopularState extends State<ProductPopular> {
                               children: [
                                 // image from api
                                 Image.network(
-                                  data![index].mImage,
+                                  data![index].image!,
                                   fit: BoxFit.cover,
                                   width: 115,
                                   height: 115,
@@ -156,7 +127,7 @@ class _ProductPopularState extends State<ProductPopular> {
                                     constraints:
                                         const BoxConstraints(maxHeight: 32),
                                     child: Text(
-                                      data![index].mTitle,
+                                      data![index].title!,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     )),
@@ -170,7 +141,7 @@ class _ProductPopularState extends State<ProductPopular> {
                                       borderRadius: BorderRadius.circular(2),
                                       color: Colors.green),
                                   child: Text(
-                                    "${data![index].mPrice}.000 VNĐ",
+                                    "${data![index].price}.000 VNĐ",
 
                                     /// api
                                     style: const TextStyle(

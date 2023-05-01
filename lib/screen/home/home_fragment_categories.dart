@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:th_flutter/assets/assets.dart';
-import 'package:th_flutter/model/get_categories/categories_info.dart';
 import 'package:th_flutter/model/get_categories/categories_response.dart';
-import 'package:th_flutter/model/get_categories/data_categories_info.dart';
-import 'package:th_flutter/model/get_categories/store_info.dart';
 import 'package:th_flutter/model/get_categories/store_response.dart';
 import 'package:th_flutter/screen/categories/list_all_categories.dart';
 
@@ -17,8 +13,8 @@ class CategoriesStore extends StatefulWidget {
 }
 
 class _CategoriesStoreState extends State<CategoriesStore> {
-  List<CategoriesInfo>? dataCategories;
-  StoreInfo? dataStore;
+  List<CategoriesResponse>? dataCategories;
+  StoreResponse? dataStore;
   @override
   void initState() {
     getStore();
@@ -26,9 +22,8 @@ class _CategoriesStoreState extends State<CategoriesStore> {
   }
 
   /// call api
-  Future<StoreInfo> getStore() async {
+  Future<StoreResponse> getStore() async {
     StoreResponse storeResponse;
-    StoreInfo storeInfo;
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
@@ -40,38 +35,16 @@ class _CategoriesStoreState extends State<CategoriesStore> {
       debugPrint("Fail to foods info $error");
       rethrow;
     }
-    if (body == null) return StoreInfo.buildDefault();
+    if (body == null) return StoreResponse.buildDefault();
     //get data from api here
     storeResponse = StoreResponse.fromJson(body);
 
-    List<CategoriesInfo> categoriesInfo = [];
-    if (storeResponse.dataCategoriesResponse != null) {
-      for (int i = 0;
-          i < storeResponse.dataCategoriesResponse!.listCategories!.length;
-          i++) {
-        CategoriesResponse categoriesResponse =
-            storeResponse.dataCategoriesResponse!.listCategories![i];
-        categoriesInfo.add(CategoriesInfo(
-          categoriesResponse.id ??= "",
-          categoriesResponse.title ??= "",
-          categoriesResponse.image ??= "",
-        ));
-      }
-    }
-    storeInfo = StoreInfo(
-      storeResponse.status!,
-      (storeResponse.dataCategoriesResponse != null)
-          ? DataCategoriesInfo(
-              categoriesInfo,
-            )
-          : null,
-    );
     setState(() {
-      dataCategories = storeInfo.mDataCategoriesInfo!.mCategoriesInfo;
-      dataStore = storeInfo;
+      dataCategories = storeResponse.dataCategoriesResponse!.listCategories;
+      dataStore = storeResponse;
     });
 
-    return storeInfo;
+    return storeResponse;
   }
 
   @override
@@ -127,8 +100,8 @@ class _CategoriesStoreState extends State<CategoriesStore> {
                           padding: const EdgeInsets.all(5),
 
                           /// call api img
-                          child: dataCategories![index].mImage.isNotEmpty
-                              ? Image.network(dataCategories![index].mImage,
+                          child: dataCategories![index].image!.isNotEmpty
+                              ? Image.network(dataCategories![index].image!,
                                   fit: BoxFit.cover)
                               : const SizedBox(),
                         );

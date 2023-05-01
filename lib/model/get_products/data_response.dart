@@ -1,7 +1,7 @@
 import '../get_products/foods_response.dart';
 
 class DataResponse {
-  List<FoodsResponse>? listFoods = null;
+  List<FoodsResponse>? listFoods;
 
   DataResponse(
     this.listFoods,
