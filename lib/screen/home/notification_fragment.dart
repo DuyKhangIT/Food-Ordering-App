@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:th_flutter/model/list_notification/list_noti_request.dart';
@@ -112,7 +111,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
         } else {
           Navigator.of(context).pop();
           Fluttertoast.showToast(
-              msg: "list notification fail!",
+              msg: "list notification empty!",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 3,

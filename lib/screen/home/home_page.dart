@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:th_flutter/screen/home/appbar/search_header.dart';
 
 import '../../handle_api/handle_api.dart';
 import '../../model/get_order/get_order_response/get_order_response.dart';
@@ -56,8 +51,7 @@ class _HomePageState extends State<HomePage> {
     Map<String, dynamic>? body;
     try {
       body = await HttpHelper.invokeHttp(
-          Uri.parse(
-              "http://14.225.204.248:7070/api/order/$userId"),
+          Uri.parse("http://14.225.204.248:7070/api/order/$userId"),
           RequestType.get,
           headers: null,
           body: null);
@@ -124,9 +118,9 @@ class _HomePageState extends State<HomePage> {
         title: homePage
             ? const Text("Home")
             : favorites
-                ? Text("Favorites")
+                ? const Text("Favorites")
                 : notification
-                    ? Text("Notificaitons")
+                    ? const Text("Notificaitons")
                     : const MenuHeader(),
         actions: homePage
             ? [
